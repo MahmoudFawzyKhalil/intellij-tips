@@ -10,15 +10,18 @@ public class LargeService {
    private final YellowRepo yellowRepo;
    private final BlueRepo blueRepo;
    private final GreenRepo greenRepo;
+   private final ColorMixer colorMixer;
 
    public void top1(long aId, long bId) {
       // extract me
-      Yellow yellow = yellowRepo.findById(aId);
-      Blue blue = blueRepo.findById(bId);
-      int greenValue = yellow.getTotal() + blue.getTotal();
+      int greenValue = colorMixer.mixGreen(aId, bId);
 
       Green green = new Green(greenValue);
       greenRepo.save(green);
+   }
+
+   private int mixGreen(long aId, long bId) {
+      return colorMixer.mixGreen(aId, bId);
    }
 
    public int top2(long betaId) {
